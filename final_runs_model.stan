@@ -90,9 +90,9 @@ transformed parameters {
 
 model {
   // Priors 
-  alpha ~ normal(3.28, 0.5);
+  alpha ~ normal(3.24, 0.5);
   beta ~ normal(0,1);
-  phi ~ gamma(10,10);
+  phi ~ gamma(1,1);
   omega ~ beta(1,1);
   
   delta_inns ~ normal(0,0.1);
