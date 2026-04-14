@@ -103,7 +103,7 @@ prepare_data = function(df) {
 }
 
 #Fit Model####
-fit_model = function(stan_data, iter = 2000, warmup = 1000, chains = 1, 
+fit_model = function(stan_data, iter = 5000, warmup = 1000, chains = 4, 
                      adapt_delta = 0.95, max_treedepth = 15) {
   # Create initial starting chain values
   init_list = list()
@@ -111,14 +111,14 @@ fit_model = function(stan_data, iter = 2000, warmup = 1000, chains = 1,
   
   for (chain in 1:chains) {
     init_list[[chain]] = list(
-      alpha = rep(rnorm(1, log(mean_runs), 0.5), stan_data$n_player),
-      beta = rnorm(stan_data$K, 0, 0.5),
-      xi_1 = rep(rnorm(1, 0, 0.5), stan_data$n_player),
-      xi_2 = rep(rlnorm(1, -3, 0.5), stan_data$n_player),
-      phi = max(0.01, rgamma(1, 10, 10)),
-      omega = runif(1, 0, 0.1),
-      delta_inns = rnorm(1, 0, 0.1),
-      delta_home = rnorm(1, 0, 0.1)
+      alpha = rep(rnorm(1, log(mean_runs),0.5), stan_data$n_player),
+      beta = rnorm(stan_data$K,0,0.5),
+      xi_1 = rep(rnorm(1,0,0.5), stan_data$n_player),
+      xi_2 = rep(rlnorm(1,-3,0.5), stan_data$n_player),
+      phi = rgamma(1, 10, 10),
+      omega = runif(1,0,1),
+      delta_inns = rnorm(1,0,0.1),
+      delta_home = rnorm(1,0,0.1)
     )
   }
   
